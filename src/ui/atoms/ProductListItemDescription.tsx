@@ -1,5 +1,5 @@
-import React from 'react';
-import { formatMoney } from '@/utils';
+import React from "react";
+import { formatMoney } from "@/utils";
 
 type Props = {
   product: {
@@ -9,7 +9,9 @@ type Props = {
   };
 };
 
-export const ProductListItemDescription = ({ product: { name, category, price } }: Props) => {
+export const ProductListItemDescription = ({
+  product: { name, category, price },
+}: Props) => {
   return (
     <div className="mt-2">
       <div>
