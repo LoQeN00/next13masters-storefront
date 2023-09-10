@@ -2,10 +2,11 @@ import React from "react";
 import type { Route } from "next";
 import { ActiveLink } from "../atoms/ActiveLink";
 
+
 type RouteItem = {
   name: string;
-  path: string;
-  partiallyActive: boolean;
+  path: Route;
+  exact: boolean;
 };
 
 export const Navbar = () => {
@@ -13,12 +14,12 @@ export const Navbar = () => {
     {
       name: "Home",
       path: "/",
-      partiallyActive: false
+      exact: true,
     },
     {
       name: "All",
       path: "/products",
-      partiallyActive: true
+      exact: false,
     },
   ]
 
@@ -28,7 +29,7 @@ export const Navbar = () => {
         {routes.map((route, index) => {
           return (
             <li key={index}>
-              <ActiveLink activeClassName="underline" href={route.path as Route} partiallyActive={route?.partiallyActive}>
+              <ActiveLink activeClassName="underline" href={route.path} exact={route?.exact}>
                 {route.name}
               </ActiveLink>
             </li>

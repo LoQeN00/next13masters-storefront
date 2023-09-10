@@ -11,7 +11,7 @@ interface Props<T extends string> {
   children: React.ReactNode;
   activeClassName?: string;
   className?: string;
-  partiallyActive?: boolean;
+  exact?: boolean;
 };
 
 export const ActiveLink = <T extends string>({
@@ -19,12 +19,12 @@ export const ActiveLink = <T extends string>({
   children,
   activeClassName,
   className = '',
-  partiallyActive,
+  exact,
 }: Props<T>) => {
   const pathname = usePathname();
 
 
-  const isActive = partiallyActive ? pathname.startsWith(href) : pathname === href;
+  const isActive = exact ? pathname === href : pathname.startsWith(href) ;
 
   const classes = clsx(
     `text-blue-400 hover:text-blue-600`,
