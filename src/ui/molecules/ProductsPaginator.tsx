@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import React from 'react';
+import { ActiveLink } from '../atoms/ActiveLink';
 import { getProductsList } from '@/api/products';
 
 type Props = {
@@ -18,19 +18,21 @@ export const ProductsPaginator = async ({ pageNumber }: Props) => {
       if (products.length === 0) return null;
 
       return (
-        <Link
+        <ActiveLink
           key={currentPageNumber}
           href={`/products/${currentPageNumber}`}
-          className={`text-2xl ${Number(pageNumber) === currentPageNumber ? 'font-bold' : ''}`}
+          className="text-xl px-4 py-2 hover:text-blue-600"
+          activeClassName="bg-blue-400 text-white rounded-2xl "
+          exact={true}
         >
           {currentPageNumber}
-        </Link>
+        </ActiveLink>
       );
     })
   );
 
   return (
-    <div className="mx-auto flex justify-center items-center mt-4 p-8">
+    <div className="mx-auto flex justify-center items-center mt-6 p-8">
       <div className="space-x-6">{pages}</div>
     </div>
   );
