@@ -1,25 +1,37 @@
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
+import { getProductsList } from '@/api/products';
 
 type Props = {
   pageNumber: string;
-  
-  options: {
-    canGoBack: boolean;
-    canGoForward: boolean;
-  }
-}
+};
 
-export const ProductsPaginator = ({pageNumber, options: {canGoBack, canGoForward}}: Props) => {
+export const ProductsPaginator = async ({ pageNumber }: Props) => {
+  const pages = await Promise.all(
+    Array.from({ length: 5 }).map(async (_, i) => {
+      const currentPageNumber = Number(pageNumber) + i - 2;
+
+      if (currentPageNumber < 1) return null;
+
+      const products = await getProductsList(20, (Number(currentPageNumber) - 1) * 20);
+
+      if (products.length === 0) return null;
+
+      return (
+        <Link
+          key={currentPageNumber}
+          href={`/products/${currentPageNumber}`}
+          className={`text-2xl ${Number(pageNumber) === currentPageNumber ? 'font-bold' : ''}`}
+        >
+          {currentPageNumber}
+        </Link>
+      );
+    })
+  );
+
   return (
-    <div className='mx-auto flex justify-center items-center mt-4'>
-      <div className='space-x-4'>
-      {canGoBack ? <Link href={`/products/${Number(pageNumber) - 1}`}>&#8592;</Link> : null}
-      <span>{pageNumber}</span>
-      {canGoForward ? <Link href={`/products/${Number(pageNumber) + 1}`}>&#8594;</Link>: null}
-      </div>
-      
+    <div className="mx-auto flex justify-center items-center mt-4 p-8">
+      <div className="space-x-6">{pages}</div>
     </div>
-  )
-}
-
+  );
+};
