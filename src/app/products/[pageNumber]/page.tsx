@@ -1,6 +1,7 @@
 import { getProductsList } from '@/api/products';
 import { ProductsPaginator } from '@/ui/molecules/ProductsPaginator';
 import { ProductList } from '@/ui/organisms/ProductList';
+import { prodOnly } from '@/utils';
 
 type Props = {
   params: {
@@ -8,7 +9,7 @@ type Props = {
   };
 };
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = prodOnly(async () => {
   const products = await getProductsList(999999, 0);
 
   const take = 20;
@@ -18,7 +19,7 @@ export const generateStaticParams = async () => {
   return Array.from({ length: pagesCount }).map((_, index) => ({
     pageNumber: String(index + 1),
   }));
-};
+});
 
 const ProductsPage = async ({ params: { pageNumber } }: Props) => {
   const take = 20;

@@ -1,7 +1,6 @@
-import React from "react";
-import type { Route } from "next";
-import { ActiveLink } from "../atoms/ActiveLink";
-
+import React from 'react';
+import type { Route } from 'next';
+import { ActiveLink } from '../atoms/ActiveLink';
 
 type RouteItem = {
   name: string;
@@ -12,16 +11,16 @@ type RouteItem = {
 export const Navbar = () => {
   const routes: RouteItem[] = [
     {
-      name: "Home",
-      path: "/",
+      name: 'Home',
+      path: '/',
       exact: true,
     },
     {
-      name: "All",
-      path: "/products",
+      name: 'All',
+      path: '/products',
       exact: false,
     },
-  ]
+  ];
 
   return (
     <nav className="bg-gray-800 text-white">
