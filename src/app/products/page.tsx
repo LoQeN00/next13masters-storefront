@@ -11,7 +11,11 @@ const ProductsPage = async () => {
   return (
     <>
       <ProductList products={products} />
-      <Link href="/products/1">See more products</Link>
+      <div className="flex justify-center mt-10">
+        <Link href="/products/1" className="bg-blue-400 text-white p-4 rounded-2xl text-md">
+          See more products
+        </Link>
+      </div>
     </>
   );
 };
