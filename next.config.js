@@ -4,7 +4,7 @@ const withMDX = require('@next/mdx')();
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['naszsklep-api.vercel.app'],
+    domains: ['naszsklep-api.vercel.app', 'picsum.photos'],
   },
   pageExtensions: ['ts', 'tsx', 'mdx'],
   experimental: {

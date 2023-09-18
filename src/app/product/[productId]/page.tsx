@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { type Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getProductById } from '@/api/products';
 import { ProductCoverImage } from '@/ui/atoms/ProductCoverImage';
 import { ProductListItemDescription } from '@/ui/atoms/ProductListItemDescription';
@@ -15,6 +16,10 @@ type Props = {
 
 const generateMetadata = prodOnly(async ({ params }: Props): Promise<Metadata> => {
   const product = await getProductById(params.productId);
+
+  if (!product) {
+    notFound();
+  }
 
   return {
     title: `${product.name} - Sklep internetowy`,
